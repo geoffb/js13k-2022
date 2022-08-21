@@ -1,0 +1,38 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛎️ Checkout
+        uses: actions/checkout@v3
+
+      - name: 🔧 Install dependencies
+        run: yarn
+
+      - name: 📒 Audit dependencies
+        run: yarn audit
+
+      - name: 👕 Lint source files
+        run: yarn lint
+
+      - name: 🧼 Clean build artifacts
+        run: yarn clean
+
+      - name: 🏗️ Build
+        run: yarn build-min
+
+      # TODO: Zip build
+
+      # - name: 📦️ Publish (itch.io)
+      #   uses: josephbmanley/butler-publish-itchio-action@master
+      #   env:
+      #     BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+      #     CHANNEL: web
+      #     ITCH_GAME: js13k-2022
+      #     ITCH_USER: gosub
+      #     PACKAGE: dist/js13k-2022.zip

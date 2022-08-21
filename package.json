@@ -1,0 +1,16 @@
+{
+	"private": true,
+	"scripts": {
+		"clean": "rm -rf dist htdocs/main.js",
+		"lint": "prettier --check .",
+		"format": "prettier --write .",
+		"build-dev": "esbuild lib/main.ts --bundle --outfile=htdocs/main.js --watch",
+		"build-min": "esbuild lib/main.ts --bundle --outfile=htdocs/main.js --minify",
+		"build-zip": "mkdir -p dist && zip -rjX9 dist/js13k-2022.zip htdocs/*",
+		"ci": "yarn clean && yarn lint && yarn build-min"
+	},
+	"devDependencies": {
+		"esbuild": "^0.15.5",
+		"prettier": "^2.7.1"
+	}
+}
