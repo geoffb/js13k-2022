@@ -1,9 +1,9 @@
 import * as Engine from "./engine/Engine";
-import Test from "./systems/Test";
+import Render from "./systems/Render";
 
 const engine = Engine.create();
 
-engine.systems.push(Test);
+engine.systems.push(Render);
 
 function frame(time: number): void {
 	Engine.update(engine, time);
