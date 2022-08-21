@@ -1,7 +1,7 @@
 {
 	"private": true,
 	"scripts": {
-		"clean": "rm -rf dist htdocs/main.js htdocs/main.js.map",
+		"clean": "rm -rf dist htdocs/main.js*",
 		"lint": "prettier --check .",
 		"format": "prettier --write .",
 		"build-dev": "esbuild lib/main.ts --bundle --outfile=htdocs/main.js --sourcemap --watch",
