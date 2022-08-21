@@ -1,13 +1,13 @@
 {
 	"private": true,
 	"scripts": {
-		"clean": "rm -rf dist htdocs/main.js",
+		"clean": "rm -rf dist htdocs/main.js htdocs/main.js.map",
 		"lint": "prettier --check .",
 		"format": "prettier --write .",
-		"build-dev": "esbuild lib/main.ts --bundle --outfile=htdocs/main.js --watch",
+		"build-dev": "esbuild lib/main.ts --bundle --outfile=htdocs/main.js --sourcemap --watch",
 		"build-min": "esbuild lib/main.ts --bundle --outfile=htdocs/main.js --minify",
 		"build-zip": "mkdir -p dist && zip -rjX9 dist/js13k-2022.zip htdocs/*",
-		"ci": "yarn clean && yarn lint && yarn build-min"
+		"ci": "yarn clean && yarn lint && yarn build-min && yarn build-zip"
 	},
 	"devDependencies": {
 		"esbuild": "^0.15.5",

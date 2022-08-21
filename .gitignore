@@ -1,3 +1,4 @@
 node_modules/
 htdocs/main.js
+htdocs/main.js.map
 dist/
