@@ -10,6 +10,9 @@ export default function (engine: Engine.Model): void {
 	ctx.resetTransform();
 	ctx.clearRect(0, 0, viewport.canvas.width, viewport.canvas.height);
 
+	const image = Images.get(engine.images, "textures.png");
+	const spritesWide = Math.floor(image.width / 16);
+
 	const sprites = Engine.getComponents<Sprite.Model>(engine, Sprite.ID);
 	for (const [id, sprite] of sprites) {
 		const transform = Engine.getComponent<Transform.Model>(
@@ -17,13 +20,16 @@ export default function (engine: Engine.Model): void {
 			id,
 			Transform.ID
 		);
-		transform.r += (Math.PI / 400) * engine.deltaTime;
 		ctx.resetTransform();
 		ctx.translate(Math.round(transform.x), Math.round(transform.y));
 		if (transform.r !== 0) {
 			ctx.rotate(transform.r);
 		}
-		const image = Images.get(engine.images, "textures.png");
-		ctx.drawImage(image, 0, 0, 16, 16, -8, -8, 16, 16);
+		if (transform.sx !== 1 || transform.sy !== 1) {
+			ctx.scale(transform.sx, transform.sy);
+		}
+		const sx = sprite.index % spritesWide;
+		const sy = Math.floor(sprite.index / spritesWide);
+		ctx.drawImage(image, sx * 16, sy * 16, 16, 16, -8, -8, 16, 16);
 	}
 }

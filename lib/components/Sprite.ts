@@ -4,8 +4,8 @@ export interface Model {
 	index: number;
 }
 
-export function create(): Model {
+export function create(index = 0): Model {
 	return {
-		index: 0,
+		index,
 	};
 }

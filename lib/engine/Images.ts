@@ -15,7 +15,9 @@ export function load(model: Model, url: string): Promise<void> {
 			model.cache[url] = image;
 			resolve();
 		});
-		image.addEventListener("error", (ev) => reject(ev.error));
+		image.addEventListener("error", () =>
+			reject(new Error(`Failed to load image: ${url}`))
+		);
 		image.src = url;
 	});
 }

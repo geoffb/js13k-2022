@@ -12,5 +12,8 @@ export default function (engine: Engine.Model): void {
 		);
 		transform.x += (body.vx / 1000) * engine.deltaTime;
 		transform.y += (body.vy / 1000) * engine.deltaTime;
+		if (body.av !== 0) {
+			transform.r += body.av * engine.deltaTime;
+		}
 	}
 }

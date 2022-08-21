@@ -2,6 +2,8 @@ import * as Viewport from "./Viewport";
 import * as Images from "./Images";
 import * as Prefabs from "../data/Prefabs";
 
+export const GlobalEntityID = 0;
+
 export type System = (model: Model) => void;
 
 export type ComponentEntry<T = unknown> = [number, T];
@@ -45,6 +47,22 @@ export function update(model: Model, now: number): void {
 
 export function createEntity(model: Model): number {
 	return model.nextEntityID++;
+}
+
+export function removeEntity(model: Model, entityID: number): void {
+	for (const componentID in model.components) {
+		const group = model.components[componentID];
+		if (group.lookup[entityID] !== undefined) {
+			group.lookup[entityID] = undefined;
+			for (let i = 0; i < group.list.length; i++) {
+				const id = group.list[i][0];
+				if (id === entityID) {
+					group.list.splice(i, 1);
+					break;
+				}
+			}
+		}
+	}
 }
 
 export function addComponent(

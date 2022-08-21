@@ -17,7 +17,7 @@ export default function (engine: Engine.Model): void {
 
 		// Render collider
 		ctx.lineWidth = 1;
-		ctx.strokeStyle = "#0f0";
+		ctx.strokeStyle = collider.contacts.length > 0 ? "#f00" : "#0f0";
 		ctx.beginPath();
 		ctx.arc(
 			Math.round(transform.x),
