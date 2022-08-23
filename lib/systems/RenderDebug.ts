@@ -20,8 +20,8 @@ export default function (engine: Engine.Model): void {
 		ctx.strokeStyle = collider.contacts.length > 0 ? "#f00" : "#0f0";
 		ctx.beginPath();
 		ctx.arc(
-			Math.round(transform.x),
-			Math.round(transform.y),
+			Math.round(transform.x + collider.ox),
+			Math.round(transform.y + collider.oy),
 			collider.radius,
 			0,
 			Maths.Tau

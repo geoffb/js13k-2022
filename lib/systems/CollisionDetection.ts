@@ -26,8 +26,8 @@ export default function (engine: Engine.Model): void {
 			id,
 			Transform.ID
 		);
-		const bx = transform.x - collider.radius;
-		const by = transform.y - collider.radius;
+		const bx = transform.x + collider.ox - collider.radius;
+		const by = transform.y + collider.oy - collider.radius;
 		const size = collider.radius * 2;
 
 		const ox = Math.floor(bx / space.cellWidth);
@@ -53,8 +53,8 @@ export default function (engine: Engine.Model): void {
 			id,
 			Transform.ID
 		);
-		const bx = transform.x - collider.radius;
-		const by = transform.y - collider.radius;
+		const bx = transform.x + collider.ox - collider.radius;
+		const by = transform.y + collider.oy - collider.radius;
 		const size = collider.radius * 2;
 
 		const ox = Math.floor(bx / space.cellWidth);
@@ -83,11 +83,11 @@ export default function (engine: Engine.Model): void {
 						);
 						if (
 							Collision.testCircleCircle(
-								transform.x,
-								transform.y,
+								transform.x + collider.ox,
+								transform.y + collider.oy,
 								collider.radius,
-								otherTransform.x,
-								otherTransform.y,
+								otherTransform.x + otherCollider.ox,
+								otherTransform.y + otherCollider.oy,
 								otherCollider.radius
 							)
 						) {
