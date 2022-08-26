@@ -9,9 +9,7 @@
 		"build-zip": "mkdir -p dist && zip -rjX9 dist/js13k-2022.zip htdocs/*",
 		"ci": "yarn clean && yarn lint && yarn build-min && yarn build-zip"
 	},
-	"prettier": {
-		"editorconfig": true
-	},
+	"prettier": {},
 	"devDependencies": {
 		"esbuild": "^0.15.5",
 		"prettier": "^2.7.1"

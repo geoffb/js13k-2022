@@ -1,5 +1,4 @@
 import * as Body from "./components/Body";
-import * as Space from "./components/Space";
 import * as Transform from "./components/Transform";
 import * as Engine from "./engine/Engine";
 import * as Images from "./engine/Images";
@@ -9,18 +8,14 @@ import Render from "./systems/Render";
 import RenderDebug from "./systems/RenderDebug";
 import Mortality from "./systems/Mortality";
 import Hazardous from "./systems/Hazard";
+import Setup from "./systems/Setup";
 
 async function main(): Promise<void> {
-	const engine = Engine.create(512, 256);
+	const engine = Engine.create(1024, 512);
 
 	await Images.loadBatch(engine.images, ["textures.png"]);
 
-	Engine.addComponent(
-		engine,
-		Engine.GlobalEntityID,
-		Space.ID,
-		Space.create(Math.floor(512 / 32), Math.floor(256 / 32), 32, 32)
-	);
+	Setup(engine);
 
 	// Define systems
 	engine.systems.push(

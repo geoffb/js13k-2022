@@ -37,7 +37,7 @@ export function create(width: number, height: number): Model {
 	if (context === null) {
 		throw new Error("Invalid canvas context");
 	}
-	context.imageSmoothingEnabled = false;
+	// context.imageSmoothingEnabled = false;
 
 	return { canvas, context };
 }
