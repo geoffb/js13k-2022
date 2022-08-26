@@ -1,6 +1,7 @@
 import * as Viewport from "./Viewport";
 import * as Images from "./Images";
 import * as Prefabs from "../data/Prefabs";
+import * as Surface from "./Surface";
 
 export const GlobalEntityID = 0;
 
@@ -24,6 +25,7 @@ export interface Model {
 	images: Images.Model;
 	nextEntityID: number;
 	components: Record<string, ComponentGroup>;
+	surfaces: Record<string, Surface.Model>;
 }
 
 export function create(width: number, height: number): Model {
@@ -40,6 +42,7 @@ export function create(width: number, height: number): Model {
 		},
 		nextEntityID: 1,
 		components: {},
+		surfaces: {},
 	};
 }
 
@@ -134,4 +137,15 @@ export function onKeyUp(model: Model, key: string): void {
 
 export function isKeyDown(model: Model, key: string): boolean {
 	return model.keyboard.down[key] === 1;
+}
+
+export function createSurface(
+	model: Model,
+	id: string,
+	width: number,
+	height: number
+): Surface.Model {
+	const surface = Surface.create(width, height);
+	model.surfaces[id] = surface;
+	return surface;
 }

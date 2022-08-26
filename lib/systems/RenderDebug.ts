@@ -4,7 +4,7 @@ import * as Transform from "../components/Transform";
 import * as Maths from "../utils/Maths";
 
 export default function (engine: Engine.Model): void {
-	return;
+	// return;
 
 	const ctx = engine.viewport.context;
 	ctx.resetTransform();

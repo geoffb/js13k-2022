@@ -15,7 +15,7 @@ export const registry: Record<string, Model> = {
 		[Body.ID]: Body.create(),
 		[Collider.ID]: Collider.create(5, 0, 3),
 		[Mortal.ID]: Mortal.create(),
-		[Mobile.ID]: Mobile.create(64),
+		[Mobile.ID]: Mobile.create(80),
 		[Thrower.ID]: Thrower.create("sword", 16),
 		[Sprite.ID]: Sprite.create(0),
 	},

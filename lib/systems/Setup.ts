@@ -1,8 +1,9 @@
-import * as Body from "../components/Body";
 import * as Game from "../components/Game";
 import * as Space from "../components/Space";
 import * as Transform from "../components/Transform";
 import * as Engine from "../engine/Engine";
+import * as Images from "../engine/Images";
+import * as Level from "../data/Level";
 
 export default function (engine: Engine.Model): void {
 	Engine.addComponent(
@@ -19,14 +20,38 @@ export default function (engine: Engine.Model): void {
 		Game.create()
 	);
 
+	const background = Engine.createSurface(engine, "background", 512, 256);
+	const tileset = Images.get(engine.images, "tiles.png");
+	const tilesWide = Math.floor(tileset.width / Level.TileSize);
+	const ctx = background.ctx;
+
+	for (let i = 0; i < Level.tiles.length; i++) {
+		const tile = Level.tiles[i];
+		const mx = i % Level.width;
+		const my = Math.floor(i / Level.width);
+		const tx = tile % tilesWide;
+		const ty = Math.floor(tile / tilesWide);
+		ctx.drawImage(
+			tileset,
+			tx * Level.TileSize,
+			ty * Level.TileSize,
+			Level.TileSize,
+			Level.TileSize,
+			mx * Level.TileSize,
+			my * Level.TileSize,
+			Level.TileSize,
+			Level.TileSize
+		);
+	}
+
 	const heroID = Engine.spawnPrefab(engine, "hero");
 	const heroTransform = Engine.getComponent<Transform.Model>(
 		engine,
 		heroID,
 		Transform.ID
 	);
-	heroTransform.x = 64;
-	heroTransform.y = 16;
+	heroTransform.x = 512 / 2;
+	heroTransform.y = 256 / 2;
 
 	game.playerID = heroID;
 

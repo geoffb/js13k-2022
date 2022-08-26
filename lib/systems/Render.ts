@@ -3,16 +3,18 @@ import * as Images from "../engine/Images";
 import * as Sprite from "../components/Sprite";
 import * as Transform from "../components/Transform";
 
+const SpriteSize = 16;
+
 export default function (engine: Engine.Model): void {
 	const viewport = engine.viewport;
-
 	const ctx = engine.viewport.context;
 	ctx.resetTransform();
-	ctx.fillStyle = "#EAA56C";
-	ctx.fillRect(0, 0, viewport.canvas.width, viewport.canvas.height);
+
+	const background = engine.surfaces["background"];
+	ctx.drawImage(background.canvas, 0, 0);
 
 	const image = Images.get(engine.images, "textures.png");
-	const spritesWide = Math.floor(image.width / 16);
+	const spritesWide = Math.floor(image.width / SpriteSize);
 
 	const sprites = Engine.getComponents<Sprite.Model>(engine, Sprite.ID);
 	if (sprites === undefined) {
@@ -26,7 +28,7 @@ export default function (engine: Engine.Model): void {
 			Transform.ID
 		);
 		ctx.resetTransform();
-		ctx.translate(Math.round(transform.x), Math.round(transform.y));
+		ctx.translate(transform.x, transform.y);
 		if (transform.r !== 0) {
 			ctx.rotate(transform.r);
 		}
@@ -35,6 +37,16 @@ export default function (engine: Engine.Model): void {
 		}
 		const sx = sprite.index % spritesWide;
 		const sy = Math.floor(sprite.index / spritesWide);
-		ctx.drawImage(image, sx * 16, sy * 16, 16, 16, -8, -8, 16, 16);
+		ctx.drawImage(
+			image,
+			sx * SpriteSize,
+			sy * SpriteSize,
+			SpriteSize,
+			SpriteSize,
+			-SpriteSize / 2,
+			-SpriteSize / 2,
+			SpriteSize,
+			SpriteSize
+		);
 	}
 }

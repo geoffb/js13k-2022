@@ -30,6 +30,11 @@ export default function (engine: Engine.Model): void {
 			id,
 			Transform.ID
 		);
+
+		if (transform.y + collider.oy - collider.radius < 32) {
+			transform.y = 32 - collider.oy + collider.radius;
+		}
+
 		const bx = transform.x + collider.ox - collider.radius;
 		const by = transform.y + collider.oy - collider.radius;
 		const size = collider.radius * 2;
