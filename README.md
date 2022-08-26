@@ -7,11 +7,37 @@ My 2022 entry for the [js13kGames](https://js13kgames.com) competition.
 - Collision response
 - Background
 - Sort render list by transform.y
+- Physics
+  - Friction
+  - Mass
+  - Knockback
 - Weapon pickups
 - Health pickups
 - Enemy AI
+  - Chase player
+  - Shoot when in range
+  - Stop to shoot?
 - Enemy spawers
 - HUD (health, etc)
 - Game over
 - Title/intro
 - Sounds
+- Tutorial
+- Content
+  - Weapons
+    - Sword
+    - Dagger
+    - Axe
+    - Spear
+    - Hammer
+  - Powerups
+    - Health Potion (Restore HP)
+    - Invisibilty Potion (Star from Mario)
+    - Green Potion??
+    - Gray Potion??
+  - Enemies
+    - Knight (Sword)
+    - Lancer (Spear)
+    - Cyclops (Hammer)
+    - Barbarian (Axe)
+    - Thief (Dagger)
