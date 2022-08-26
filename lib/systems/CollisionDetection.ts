@@ -18,6 +18,10 @@ export default function (engine: Engine.Model): void {
 	}
 
 	const colliders = Engine.getComponents<Collider.Model>(engine, Collider.ID);
+	if (colliders === undefined) {
+		return;
+	}
+
 	for (const [id, collider] of colliders) {
 		collider.contacts.length = 0;
 

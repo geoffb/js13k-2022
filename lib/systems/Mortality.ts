@@ -3,6 +3,10 @@ import * as Engine from "../engine/Engine";
 
 export default function (engine: Engine.Model): void {
 	const mortals = Engine.getComponents<Mortal.Model>(engine, Mortal.ID);
+	if (mortals === undefined) {
+		return;
+	}
+
 	for (const [id, mortal] of mortals) {
 		if (mortal.health <= 0) {
 			// TODO: Defer entity removal

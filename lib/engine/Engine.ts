@@ -18,6 +18,9 @@ export interface Model {
 	deltaTime: number;
 	systems: System[];
 	viewport: Viewport.Model;
+	keyboard: {
+		down: Record<string, number | undefined>;
+	};
 	images: Images.Model;
 	nextEntityID: number;
 	components: Record<string, ComponentGroup>;
@@ -32,6 +35,9 @@ export function create(width: number, height: number): Model {
 		systems: [],
 		viewport,
 		images,
+		keyboard: {
+			down: {},
+		},
 		nextEntityID: 1,
 		components: {},
 	};
@@ -65,12 +71,12 @@ export function removeEntity(model: Model, entityID: number): void {
 	}
 }
 
-export function addComponent(
+export function addComponent<T = unknown>(
 	model: Model,
 	entityID: number,
 	componentID: string,
-	componentData: unknown
-): void {
+	componentData: T
+): T {
 	let group = model.components[componentID];
 	if (group === undefined) {
 		group = model.components[componentID] = {
@@ -80,6 +86,7 @@ export function addComponent(
 	}
 	group.list.push([entityID, componentData]);
 	group.lookup[entityID] = componentData;
+	return componentData;
 }
 
 export function getComponent<T>(
@@ -94,9 +101,11 @@ export function getComponent<T>(
 export function getComponents<T>(
 	model: Model,
 	componentID: string
-): ComponentEntry<T>[] {
+): ComponentEntry<T>[] | undefined {
 	const group = model.components[componentID];
-	return group.list as ComponentEntry<T>[];
+	if (group !== undefined) {
+		return group.list as ComponentEntry<T>[];
+	}
 }
 
 export function spawnPrefab(model: Model, prefabID: string): number {
@@ -111,4 +120,18 @@ export function spawnPrefab(model: Model, prefabID: string): number {
 		);
 	}
 	return entityID;
+}
+
+export function onKeyDown(model: Model, key: string): void {
+	console.debug(`key down: ${key}`);
+	model.keyboard.down[key] = 1;
+}
+
+export function onKeyUp(model: Model, key: string): void {
+	console.debug(`key up: ${key}`);
+	model.keyboard.down[key] = undefined;
+}
+
+export function isKeyDown(model: Model, key: string): boolean {
+	return model.keyboard.down[key] === 1;
 }

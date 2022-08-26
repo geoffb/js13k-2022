@@ -14,6 +14,10 @@ export default function (engine: Engine.Model): void {
 	const spritesWide = Math.floor(image.width / 16);
 
 	const sprites = Engine.getComponents<Sprite.Model>(engine, Sprite.ID);
+	if (sprites === undefined) {
+		return;
+	}
+
 	for (const [id, sprite] of sprites) {
 		const transform = Engine.getComponent<Transform.Model>(
 			engine,

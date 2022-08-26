@@ -1,67 +1,49 @@
-import * as Body from "./components/Body";
-import * as Space from "./components/Space";
-import * as Transform from "./components/Transform";
 import * as Engine from "./engine/Engine";
 import * as Images from "./engine/Images";
 import CollisionDetection from "./systems/CollisionDetection";
+import Hazardous from "./systems/Hazard";
+import Mobility from "./systems/Mobility";
+import Mortality from "./systems/Mortality";
+import Input from "./systems/Input";
 import Physics from "./systems/Physics";
 import Render from "./systems/Render";
+import Throwing from "./systems/Throwing";
 import RenderDebug from "./systems/RenderDebug";
-import Mortality from "./systems/Mortality";
-import Hazardous from "./systems/Hazard";
+import Setup from "./systems/Setup";
 
 async function main(): Promise<void> {
 	const engine = Engine.create(512, 256);
 
+	// Handle keyboard events
+	window.addEventListener("keydown", (ev) => Engine.onKeyDown(engine, ev.key));
+	window.addEventListener("keyup", (ev) => Engine.onKeyUp(engine, ev.key));
+
+	// Load images
 	await Images.loadBatch(engine.images, ["textures.png"]);
 
-	Engine.addComponent(
-		engine,
-		Engine.GlobalEntityID,
-		Space.ID,
-		Space.create(Math.floor(512 / 32), Math.floor(256 / 32), 32, 32)
-	);
+	// Initialize game
+	Setup(engine);
 
-	// Define systems
+	// Define game update systems
 	engine.systems.push(
+		Input,
+		Mobility,
+		Throwing,
 		Physics,
 		CollisionDetection,
 		Hazardous,
 		Mortality,
-		Render,
-		RenderDebug
+		Render
+		// RenderDebug
 	);
 
+	// Core game loop
 	const frame = function (time: number): void {
 		Engine.update(engine, time);
 		requestAnimationFrame(frame);
 	};
 
-	const axeID = Engine.spawnPrefab(engine, "axe");
-	const axeTransform = Engine.getComponent<Transform.Model>(
-		engine,
-		axeID,
-		Transform.ID
-	);
-	axeTransform.x = 64;
-	axeTransform.y = 72;
-	const axeBody = Engine.getComponent<Body.Model>(engine, axeID, Body.ID);
-	axeBody.vx = 64;
-	// axeBody.vy = 32;
-
-	const clopsID = Engine.spawnPrefab(engine, "cyclops");
-	const clopsTransform = Engine.getComponent<Transform.Model>(
-		engine,
-		clopsID,
-		Transform.ID
-	);
-	clopsTransform.x = 128;
-	clopsTransform.y = 64;
-	clopsTransform.sx = -1;
-	// const body = Engine.getComponent<Body.Model>(engine, clopsID, Body.ID);
-	// body.vx = 32;
-	// body.vy = 32;
-
+	// Start game loop
 	frame(performance.now());
 }
 

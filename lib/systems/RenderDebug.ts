@@ -8,6 +8,10 @@ export default function (engine: Engine.Model): void {
 	ctx.resetTransform();
 
 	const colliders = Engine.getComponents<Collider.Model>(engine, Collider.ID);
+	if (colliders === undefined) {
+		return;
+	}
+
 	for (const [id, collider] of colliders) {
 		const transform = Engine.getComponent<Transform.Model>(
 			engine,

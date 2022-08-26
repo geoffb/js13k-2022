@@ -5,6 +5,10 @@ import * as Mortal from "../components/Mortal";
 
 export default function (engine: Engine.Model): void {
 	const hazards = Engine.getComponents<Hazard.Model>(engine, Hazard.ID);
+	if (hazards === undefined) {
+		return;
+	}
+
 	for (const [id, hazard] of hazards) {
 		const collider = Engine.getComponent<Collider.Model>(
 			engine,

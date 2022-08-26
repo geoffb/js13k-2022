@@ -4,6 +4,10 @@ import * as Transform from "../components/Transform";
 
 export default function (engine: Engine.Model): void {
 	const bodies = Engine.getComponents<Body.Model>(engine, Body.ID);
+	if (bodies === undefined) {
+		return;
+	}
+
 	for (const [id, body] of bodies) {
 		const transform = Engine.getComponent<Transform.Model>(
 			engine,
