@@ -13,13 +13,13 @@ export const registry: Record<string, Model> = {
 		[Body.ID]: Body.create(0, 0, Math.PI / 500),
 		[Collider.ID]: Collider.create(20),
 		[Hazard.ID]: Hazard.create(),
-		[Sprite.ID]: Sprite.create(1),
+		[Sprite.ID]: Sprite.create("sprites64", 1),
 	},
 	cyclops: {
 		[Transform.ID]: Transform.create(),
 		[Body.ID]: Body.create(),
 		[Collider.ID]: Collider.create(22),
 		[Mortal.ID]: Mortal.create(),
-		[Sprite.ID]: Sprite.create(0),
+		[Sprite.ID]: Sprite.create("sprites64", 0),
 	},
 };

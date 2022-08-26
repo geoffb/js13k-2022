@@ -1,6 +1,7 @@
+import * as Space from "../components/Space";
+import * as SpriteSheets from "../data/SpriteSheets";
 import * as Engine from "../engine/Engine";
 import * as Shape from "../utils/Shape";
-import * as Space from "../components/Space";
 
 export default function (engine: Engine.Model): void {
 	// Define global components
@@ -11,20 +12,30 @@ export default function (engine: Engine.Model): void {
 		Space.create(Math.floor(512 / 32), Math.floor(256 / 32), 32, 32)
 	);
 
-	const sprites = Engine.createSurface(engine, "sprites", 128, 64);
-	const ctx = sprites.ctx;
-
-	Shape.draw(ctx, Shape.Type.Circle, [0.5, 0.5, 0.4], 64, "white", "black", 2);
-	Shape.draw(ctx, Shape.Type.Circle, [0.5, 0.5, 0.3], 64, "red");
-
-	ctx.translate(64, 0);
-	Shape.draw(
-		ctx,
-		Shape.Type.Rectangle,
-		[0.2, 0.2, 0.6, 0.6],
-		64,
-		"yellow",
-		"green",
-		2
-	);
+	// Create sprite sheets from data
+	for (const sheetID in SpriteSheets.registry) {
+		const sheet = SpriteSheets.registry[sheetID];
+		const surface = Engine.createSurface(
+			engine,
+			sheetID,
+			sheet.size * sheet.sprites.length,
+			sheet.size
+		);
+		const ctx = surface.ctx;
+		for (let i = 0; i < sheet.sprites.length; i++) {
+			const sprite = sheet.sprites[i];
+			for (const shape of sprite) {
+				Shape.draw(
+					ctx,
+					shape.type,
+					shape.data,
+					sheet.size,
+					shape.fill,
+					shape.stroke,
+					shape.strokeWidth
+				);
+			}
+			ctx.translate(sheet.size, 0);
+		}
+	}
 }

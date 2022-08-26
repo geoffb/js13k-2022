@@ -5,5 +5,3 @@ My 2022 entry for the [js13kGames](https://js13kgames.com) competition.
 ## TODO
 
 - Input handling
-- Collision detection
-- Collision response

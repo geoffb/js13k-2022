@@ -1,19 +1,16 @@
 import * as Body from "./components/Body";
 import * as Transform from "./components/Transform";
 import * as Engine from "./engine/Engine";
-import * as Images from "./engine/Images";
 import CollisionDetection from "./systems/CollisionDetection";
+import Hazardous from "./systems/Hazard";
+import Mortality from "./systems/Mortality";
 import Physics from "./systems/Physics";
 import Render from "./systems/Render";
 import RenderDebug from "./systems/RenderDebug";
-import Mortality from "./systems/Mortality";
-import Hazardous from "./systems/Hazard";
 import Setup from "./systems/Setup";
 
 async function main(): Promise<void> {
 	const engine = Engine.create(1024, 512);
-
-	await Images.loadBatch(engine.images, ["textures.png"]);
 
 	Setup(engine);
 

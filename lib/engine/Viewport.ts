@@ -9,6 +9,7 @@ function autoSize(canvas: HTMLCanvasElement): void {
 	const height = window.innerHeight;
 
 	// Determine scale while maintaining aspect ratio
+	// const scale = 1;
 	const scale = Math.min(width / canvas.width, height / canvas.height);
 
 	// Calculate centered position for scaled canvas
@@ -37,7 +38,7 @@ export function create(width: number, height: number): Model {
 	if (context === null) {
 		throw new Error("Invalid canvas context");
 	}
-	// context.imageSmoothingEnabled = false;
+	context.imageSmoothingEnabled = false;
 
 	return { canvas, context };
 }

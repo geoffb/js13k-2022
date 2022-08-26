@@ -1,8 +1,11 @@
-export enum Color {
-	Black = "#000",
-	White = "#fff",
-	Blue = "#00f",
-	Pink = "#f0f",
-	Green = "#0f0",
-	Red = "#f00",
-}
+export const Black = "#000";
+
+export const White = "#fff";
+
+export const Red = "#f00";
+
+export const Green = "#0f0f";
+
+export const Blue = "#00f";
+
+export const Pink = "#f0f";

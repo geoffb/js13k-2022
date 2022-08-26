@@ -11,11 +11,13 @@ export function create(width = 0, height = 0): Model {
 	if (ctx === null) {
 		throw new Error("Invalid context");
 	}
-	// ctx.imageSmoothingEnabled = false;
-	return { canvas, ctx };
+	ctx.imageSmoothingEnabled = false;
+	const model = { canvas, ctx };
+	reset(model);
+	return model;
 }
 
-// export function reset(model: Model): void {
-// 	model.ctx.resetTransform();
-// 	model.ctx.clearRect(0, 0, model.canvas.width, model.canvas.height);
-// }
+export function reset(model: Model): void {
+	model.ctx.resetTransform();
+	model.ctx.clearRect(0, 0, model.canvas.width, model.canvas.height);
+}

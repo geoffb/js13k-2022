@@ -1,7 +1,6 @@
 import * as Prefabs from "../data/Prefabs";
-import * as Images from "./Images";
-import * as Viewport from "./Viewport";
 import * as Surface from "./Surface";
+import * as Viewport from "./Viewport";
 
 export const GlobalEntityID = 0;
 
@@ -19,7 +18,6 @@ export interface Model {
 	deltaTime: number;
 	systems: System[];
 	viewport: Viewport.Model;
-	images: Images.Model;
 	nextEntityID: number;
 	components: Record<string, ComponentGroup>;
 	surfaces: Record<string, Surface.Model>;
@@ -27,13 +25,11 @@ export interface Model {
 
 export function create(width: number, height: number): Model {
 	const viewport = Viewport.create(width, height);
-	const images = Images.create();
 	return {
 		lastTime: 0,
 		deltaTime: 0,
 		systems: [],
 		viewport,
-		images,
 		nextEntityID: 1,
 		components: {},
 		surfaces: {},

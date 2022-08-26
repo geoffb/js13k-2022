@@ -1,9 +1,10 @@
 body {
 	margin: 0;
-	background: #fff;
+	background: #111;
 }
 
-/* canvas {
+canvas {
+	background: #fff;
 	image-rendering: pixelated !important;
 	image-rendering: crisp-edges !important;
-} */
+}
