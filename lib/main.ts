@@ -33,8 +33,8 @@ async function main(): Promise<void> {
 		CollisionDetection,
 		Hazardous,
 		Mortality,
-		Render
-		// RenderDebug
+		Render,
+		RenderDebug
 	);
 
 	// Core game loop

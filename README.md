@@ -6,4 +6,9 @@ My 2022 entry for the [js13kGames](https://js13kgames.com) competition.
 
 - Collision response
 - Background
-- Game loop
+- Sort render list by transform.y
+- Weapon pickups
+- Enemy AI
+- Enemy spawers
+- Game over
+- Title/intro

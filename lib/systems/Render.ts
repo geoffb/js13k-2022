@@ -8,7 +8,8 @@ export default function (engine: Engine.Model): void {
 
 	const ctx = engine.viewport.context;
 	ctx.resetTransform();
-	ctx.clearRect(0, 0, viewport.canvas.width, viewport.canvas.height);
+	ctx.fillStyle = "#EAA56C";
+	ctx.fillRect(0, 0, viewport.canvas.width, viewport.canvas.height);
 
 	const image = Images.get(engine.images, "textures.png");
 	const spritesWide = Math.floor(image.width / 16);
