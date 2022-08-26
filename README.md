@@ -41,3 +41,6 @@ My 2022 entry for the [js13kGames](https://js13kgames.com) competition.
     - Cyclops (Hammer)
     - Barbarian (Axe)
     - Thief (Dagger)
+- Final optimizaitons
+  - Crush images with TinyPNG
+  - Remove debugging systems
