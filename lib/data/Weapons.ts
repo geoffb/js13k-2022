@@ -8,8 +8,8 @@ export interface Model {
 export const registry: Record<string, Model> = {
 	sword: {
 		prefabID: "sword",
-		speed: 150,
-		cooldown: 400,
+		speed: 200,
+		cooldown: 300,
 		rotate: true,
 	},
 	axe: {

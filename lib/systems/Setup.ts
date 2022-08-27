@@ -63,4 +63,13 @@ export default function (engine: Engine.Model): void {
 	);
 	clopsTransform.x = 128;
 	clopsTransform.y = 64;
+
+	const lancerID = Engine.spawnPrefab(engine, "lancer");
+	const lancerTransform = Engine.getComponent<Transform.Model>(
+		engine,
+		lancerID,
+		Transform.ID
+	);
+	lancerTransform.x = 128;
+	lancerTransform.y = 128;
 }

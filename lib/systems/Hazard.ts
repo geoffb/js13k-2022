@@ -57,6 +57,8 @@ export default function (engine: Engine.Model): void {
 						mortalBody.vy = Math.sin(angle) * hazard.knockback;
 					}
 				}
+				Engine.removeEntity(engine, id);
+				break;
 			}
 		}
 	}

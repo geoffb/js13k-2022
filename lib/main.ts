@@ -10,6 +10,7 @@ import Render from "./systems/Render";
 import Throwing from "./systems/Throwing";
 import RenderDebug from "./systems/RenderDebug";
 import Setup from "./systems/Setup";
+import MonsterAI from "./systems/MonsterAI";
 
 async function main(): Promise<void> {
 	const engine = Engine.create(512, 256);
@@ -27,6 +28,7 @@ async function main(): Promise<void> {
 	// Define game update systems
 	engine.systems.push(
 		Input,
+		MonsterAI,
 		Mobility,
 		Throwing,
 		Physics,
