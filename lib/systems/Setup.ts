@@ -44,6 +44,26 @@ export default function (engine: Engine.Model): void {
 		);
 	}
 
+	for (const entity of Level.entities) {
+		const id = Engine.spawnPrefab(engine, entity.prefab);
+		if (entity.components !== undefined) {
+			for (const componentID in entity.components) {
+				const component = Engine.getComponent<Record<string, unknown>>(
+					engine,
+					id,
+					componentID
+				);
+				const data = entity.components[componentID];
+				for (const key in data) {
+					component[key] = data[key];
+				}
+			}
+		}
+		if (entity.handle !== undefined) {
+			game.handles[entity.handle] = id;
+		}
+	}
+
 	const heroID = Engine.spawnPrefab(engine, "hero");
 	const heroTransform = Engine.getComponent<Transform.Model>(
 		engine,

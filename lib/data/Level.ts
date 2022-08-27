@@ -2,6 +2,14 @@ export const TileSize = 16;
 
 export const width = 32;
 
+export type Component = Record<string, unknown>;
+
+export interface Entity {
+	prefab: string;
+	components?: Record<string, Component>;
+	handle?: string;
+}
+
 // prettier-ignore
 export const tiles: number[] = [
 	5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5,
@@ -20,4 +28,29 @@ export const tiles: number[] = [
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+];
+
+export const entities: Entity[] = [
+	{
+		prefab: "text1",
+		handle: "main",
+		components: {
+			transform: {
+				x: 256,
+				y: 48,
+				v: false,
+			},
+		},
+	},
+	{
+		prefab: "text2",
+		handle: "sub",
+		components: {
+			transform: {
+				x: 256,
+				y: 208,
+				v: false,
+			},
+		},
+	},
 ];

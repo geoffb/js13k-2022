@@ -6,14 +6,21 @@ export interface Model {
 	r: number;
 	sx: number;
 	sy: number;
+	v: boolean;
 }
 
-export function create(): Model {
+export function create(
+	rotation = 0,
+	scaleX = 1,
+	scaleY = 1,
+	visible = true
+): Model {
 	return {
 		x: 0,
 		y: 0,
-		r: 0,
-		sx: 1,
-		sy: 1,
+		r: rotation,
+		sx: scaleX,
+		sy: scaleY,
+		v: visible,
 	};
 }

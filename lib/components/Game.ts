@@ -8,11 +8,13 @@ export const enum Phase {
 export interface Model {
 	phase: Phase;
 	playerID: number | undefined;
+	handles: Record<string, number | undefined>;
 }
 
 export function create(): Model {
 	return {
 		phase: Phase.Play,
 		playerID: undefined,
+		handles: {},
 	};
 }

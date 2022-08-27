@@ -7,10 +7,19 @@ import * as Mortal from "../components/Mortal";
 import * as Mobile from "../components/Mobile";
 import * as Monster from "../components/Monster";
 import * as Thrower from "../components/Thrower";
+import * as Text from "../components/Text";
 
 export type Model = Record<string, unknown>;
 
 export const registry: Record<string, Model> = {
+	text1: {
+		[Transform.ID]: Transform.create(0, 3, 3),
+		[Text.ID]: Text.create("GAME OVER"),
+	},
+	text2: {
+		[Transform.ID]: Transform.create(),
+		[Text.ID]: Text.create("PRESS SPACEBAR"),
+	},
 	hero: {
 		[Transform.ID]: Transform.create(),
 		[Body.ID]: Body.create(10),

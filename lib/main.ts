@@ -21,7 +21,11 @@ async function main(): Promise<void> {
 	window.addEventListener("keyup", (ev) => Engine.onKeyUp(engine, ev.key));
 
 	// Load images
-	await Images.loadBatch(engine.images, ["textures.png", "tiles.png"]);
+	await Images.loadBatch(engine.images, [
+		"textures.png",
+		"tiles.png",
+		"font.png",
+	]);
 
 	// Initialize game
 	Setup(engine);
