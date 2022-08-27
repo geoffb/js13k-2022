@@ -26,13 +26,14 @@ jobs:
       - name: 🏗️ Build
         run: yarn build-min
 
-      # TODO: Zip build
+      - name: 🗜️ Zip
+        run: yarn build-zip
 
-      # - name: 📦️ Publish (itch.io)
-      #   uses: josephbmanley/butler-publish-itchio-action@master
-      #   env:
-      #     BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
-      #     CHANNEL: web
-      #     ITCH_GAME: js13k-2022
-      #     ITCH_USER: gosub
-      #     PACKAGE: dist/js13k-2022.zip
+      - name: 📦️ Publish (itch.io)
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+          CHANNEL: web
+          ITCH_GAME: js13k-2022
+          ITCH_USER: gosub
+          PACKAGE: dist/js13k-2022.zip
