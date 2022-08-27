@@ -14,10 +14,21 @@ export default function (engine: Engine.Model): void {
 			id,
 			Transform.ID
 		);
+
+		if (body.vx * body.vx + body.vy * body.vy < 300) {
+			body.vx = 0;
+			body.vy = 0;
+		}
+
 		transform.x += (body.vx / 1000) * engine.deltaTime;
 		transform.y += (body.vy / 1000) * engine.deltaTime;
 		if (body.av !== 0) {
 			transform.r += body.av * engine.deltaTime;
+		}
+		if (body.mass > 0) {
+			const drag = 1 - (1 / 1000) * body.mass * 10;
+			body.vx *= drag;
+			body.vy *= drag;
 		}
 	}
 }
