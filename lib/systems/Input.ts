@@ -10,6 +10,10 @@ export default function (engine: Engine.Model): void {
 		Game.ID
 	);
 
+	if (game.playerID === undefined) {
+		return;
+	}
+
 	const playerMobile = Engine.getComponent<Mobile.Model>(
 		engine,
 		game.playerID,

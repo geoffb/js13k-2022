@@ -18,30 +18,39 @@ export default function (engine: Engine.Model): void {
 		Game.ID
 	);
 
-	const playerTransform = Engine.getComponent<Transform.Model>(
-		engine,
-		game.playerID,
-		Transform.ID
-	);
+	let targetTransform: Transform.Model | undefined;
+	if (game.playerID !== undefined) {
+		targetTransform = Engine.getComponent<Transform.Model>(
+			engine,
+			game.playerID,
+			Transform.ID
+		);
+	}
 
-	for (const [id, monster] of monsters) {
+	for (const [id] of monsters) {
 		const transform = Engine.getComponent<Transform.Model>(
 			engine,
 			id,
 			Transform.ID
 		);
-
-		const angle = Trig.angle(
-			playerTransform.x - transform.x,
-			playerTransform.y - transform.y
-		);
-
 		const mobile = Engine.getComponent<Mobile.Model>(engine, id, Mobile.ID);
-		mobile.dx = Math.cos(angle);
-		mobile.dy = Math.sin(angle);
-
 		const thrower = Engine.getComponent<Thrower.Model>(engine, id, Thrower.ID);
-		thrower.dx = Math.cos(angle);
-		thrower.dy = Math.sin(angle);
+		if (targetTransform !== undefined) {
+			const angle = Trig.angle(
+				targetTransform.x - transform.x,
+				targetTransform.y - transform.y
+			);
+			const cos = Math.cos(angle);
+			const sin = Math.sin(angle);
+			mobile.dx = cos;
+			mobile.dy = sin;
+			thrower.dx = cos;
+			thrower.dy = sin;
+		} else {
+			mobile.dx = 0;
+			mobile.dy = 0;
+			thrower.dx = 0;
+			thrower.dy = 0;
+		}
 	}
 }

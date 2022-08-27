@@ -1,11 +1,18 @@
 export const ID = "game";
 
+export const enum Phase {
+	Play,
+	Over,
+}
+
 export interface Model {
-	playerID: number;
+	phase: Phase;
+	playerID: number | undefined;
 }
 
 export function create(): Model {
 	return {
-		playerID: 0,
+		phase: Phase.Play,
+		playerID: undefined,
 	};
 }

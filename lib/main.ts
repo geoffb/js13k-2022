@@ -10,6 +10,7 @@ import Render from "./systems/Render";
 import Throwing from "./systems/Throwing";
 import RenderDebug from "./systems/RenderDebug";
 import Setup from "./systems/Setup";
+import Director from "./systems/Director";
 import MonsterAI from "./systems/MonsterAI";
 
 async function main(): Promise<void> {
@@ -35,6 +36,7 @@ async function main(): Promise<void> {
 		CollisionDetection,
 		Hazardous,
 		Mortality,
+		Director,
 		Render,
 		RenderDebug
 	);
