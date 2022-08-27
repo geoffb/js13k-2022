@@ -38,7 +38,7 @@ export default function (engine: Engine.Model): void {
 		const weapon = Weapons.registry[thrower.weaponID];
 
 		// Set thrower cooldown
-		thrower.cooldown = weapon.cooldown;
+		thrower.cooldown = weapon.cooldown * thrower.cooldownScale;
 
 		// Determine throwing angle
 		const angle = Trig.angle(thrower.dx, thrower.dy);

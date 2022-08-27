@@ -2,6 +2,7 @@ import * as Engine from "../engine/Engine";
 import * as Mobile from "../components/Mobile";
 import * as Transform from "../components/Transform";
 import * as Monster from "../components/Monster";
+import * as Thrower from "../components/Thrower";
 import * as Game from "../components/Game";
 import * as Trig from "../math/Trig";
 
@@ -38,5 +39,9 @@ export default function (engine: Engine.Model): void {
 		const mobile = Engine.getComponent<Mobile.Model>(engine, id, Mobile.ID);
 		mobile.dx = Math.cos(angle);
 		mobile.dy = Math.sin(angle);
+
+		const thrower = Engine.getComponent<Thrower.Model>(engine, id, Thrower.ID);
+		thrower.dx = Math.cos(angle);
+		thrower.dy = Math.sin(angle);
 	}
 }

@@ -6,7 +6,6 @@ import * as Transform from "../components/Transform";
 const SpriteSize = 16;
 
 export default function (engine: Engine.Model): void {
-	const viewport = engine.viewport;
 	const ctx = engine.viewport.context;
 	ctx.resetTransform();
 
@@ -28,7 +27,7 @@ export default function (engine: Engine.Model): void {
 			Transform.ID
 		);
 		ctx.resetTransform();
-		ctx.translate(transform.x, transform.y);
+		ctx.translate(Math.round(transform.x), Math.round(transform.y));
 		if (transform.r !== 0) {
 			ctx.rotate(transform.r);
 		}
@@ -43,8 +42,8 @@ export default function (engine: Engine.Model): void {
 			sy * SpriteSize,
 			SpriteSize,
 			SpriteSize,
-			-SpriteSize / 2,
-			-SpriteSize / 2,
+			-Math.round(SpriteSize / 2),
+			-Math.round(SpriteSize / 2),
 			SpriteSize,
 			SpriteSize
 		);
