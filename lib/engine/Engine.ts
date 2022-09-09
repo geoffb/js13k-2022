@@ -139,6 +139,12 @@ export function isKeyDown(model: Model, key: string): boolean {
 	return model.keyboard.down[key] === 1;
 }
 
+export function resetKeys(model: Model): void {
+	for (const key in model.keyboard.down) {
+		model.keyboard.down[key] = undefined;
+	}
+}
+
 export function createSurface(
 	model: Model,
 	id: string,

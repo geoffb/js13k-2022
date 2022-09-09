@@ -43,29 +43,49 @@ function showMessage(
 function triggerGameOver(engine: Engine.Model, game: Game.Model): void {
 	game.playerID = undefined;
 	showMessage(engine, game, "GAME OVER", "PRESS ANY KEY");
-	game.phase = Game.Phase.Over;
+	// changePhase(Game.Phase.Title);
 }
 
-function play(engine: Engine.Model, game: Game.Model): void {
-	if (game.playerID === undefined) {
-		triggerGameOver(engine, game);
-		return;
-	}
-
-	const playerMortal = Engine.getComponent<Mortal.Model>(
-		engine,
-		game.playerID,
-		Mortal.ID
-	);
-	if (playerMortal === undefined || playerMortal.health <= 0) {
-		triggerGameOver(engine, game);
-		return;
-	}
+function changePhase(
+	engine: Engine.Model,
+	game: Game.Model,
+	phase: Game.Phase
+): void {
+	Engine.resetKeys(engine);
+	game.phase = phase;
 }
 
-function over(engine: Engine.Model, game: Game.Model): void {
-	// TODO: What to do in over state?
-}
+type PhaseHandler = (engine: Engine.Model, game: Game.Model) => void;
+
+const phaseHandlers: Record<Game.Phase, PhaseHandler> = {
+	[Game.Phase.Setup]: (engine, game) => {
+		showMessage(engine, game, "BLOODBATH", "PRESS ANY KEY");
+		game.phase = Game.Phase.Title;
+	},
+	[Game.Phase.Title]: (engine, game) => {
+		// TODO: Advance to Play based upon keyboard input
+		game.phase = Game.Phase.Play;
+	},
+	[Game.Phase.Play]: (engine, game) => {
+		if (game.playerID === undefined) {
+			triggerGameOver(engine, game);
+			return;
+		}
+
+		const playerMortal = Engine.getComponent<Mortal.Model>(
+			engine,
+			game.playerID,
+			Mortal.ID
+		);
+		if (playerMortal === undefined || playerMortal.health <= 0) {
+			triggerGameOver(engine, game);
+			return;
+		}
+	},
+	[Game.Phase.Over]: (engine, game) => {
+		// TODO: Return to title based upon keyboard input
+	},
+};
 
 export default function (engine: Engine.Model): void {
 	const game = Engine.getComponent<Game.Model>(
@@ -73,12 +93,6 @@ export default function (engine: Engine.Model): void {
 		Engine.GlobalEntityID,
 		Game.ID
 	);
-	switch (game.phase) {
-		case Game.Phase.Play:
-			play(engine, game);
-			break;
-		case Game.Phase.Over:
-			over(engine, game);
-			break;
-	}
+	const handler = phaseHandlers[game.phase];
+	handler(engine, game);
 }

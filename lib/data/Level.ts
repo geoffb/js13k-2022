@@ -37,7 +37,7 @@ export const entities: Entity[] = [
 		components: {
 			transform: {
 				x: 256,
-				y: 48,
+				y: 64,
 				v: false,
 			},
 		},
