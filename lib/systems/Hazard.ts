@@ -1,5 +1,6 @@
 import * as Engine from "../engine/Engine";
 import * as Collider from "../components/Collider";
+import * as Deadpool from "../components/Deadpool";
 import * as Body from "../components/Body";
 import * as Hazard from "../components/Hazard";
 import * as Mortal from "../components/Mortal";
@@ -11,6 +12,12 @@ export default function (engine: Engine.Model): void {
 	if (hazards === undefined) {
 		return;
 	}
+
+	const deadpool = Engine.getComponent(
+		engine,
+		Engine.GlobalEntityID,
+		Deadpool.ID
+	);
 
 	for (const [id, hazard] of hazards) {
 		const collider = Engine.getComponent<Collider.Model>(

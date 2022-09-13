@@ -1,3 +1,4 @@
+import * as Deadpool from "../components/Deadpool";
 import * as Game from "../components/Game";
 import * as Space from "../components/Space";
 import * as Transform from "../components/Transform";
@@ -11,6 +12,13 @@ export default function (engine: Engine.Model): void {
 		Engine.GlobalEntityID,
 		Space.ID,
 		Space.create(Math.floor(512 / 32), Math.floor(256 / 32), 32, 32)
+	);
+
+	Engine.addComponent(
+		engine,
+		Engine.GlobalEntityID,
+		Deadpool.ID,
+		Deadpool.create()
 	);
 
 	const game = Engine.addComponent(
@@ -84,12 +92,12 @@ export default function (engine: Engine.Model): void {
 	clopsTransform.x = 128;
 	clopsTransform.y = 64;
 
-	const lancerID = Engine.spawnPrefab(engine, "lancer");
-	const lancerTransform = Engine.getComponent<Transform.Model>(
-		engine,
-		lancerID,
-		Transform.ID
-	);
-	lancerTransform.x = 128;
-	lancerTransform.y = 128;
+	// const lancerID = Engine.spawnPrefab(engine, "lancer");
+	// const lancerTransform = Engine.getComponent<Transform.Model>(
+	// 	engine,
+	// 	lancerID,
+	// 	Transform.ID
+	// );
+	// lancerTransform.x = 128;
+	// lancerTransform.y = 128;
 }

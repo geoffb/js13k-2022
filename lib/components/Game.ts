@@ -15,7 +15,7 @@ export interface Model {
 
 export function create(): Model {
 	return {
-		phase: Phase.Setup,
+		phase: Phase.Play,
 		playerID: undefined,
 		handles: {},
 	};

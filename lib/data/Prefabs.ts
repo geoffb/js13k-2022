@@ -3,6 +3,7 @@ import * as Collider from "../components/Collider";
 import * as Sprite from "../components/Sprite";
 import * as Transform from "../components/Transform";
 import * as Hazard from "../components/Hazard";
+import * as Lifetime from "../components/Lifetime";
 import * as Mortal from "../components/Mortal";
 import * as Mobile from "../components/Mobile";
 import * as Monster from "../components/Monster";
@@ -43,12 +44,16 @@ export const registry: Record<string, Model> = {
 		[Hazard.ID]: Hazard.create(),
 		[Sprite.ID]: Sprite.create(5),
 	},
+	blood: {
+		[Transform.ID]: Transform.create(),
+		[Sprite.ID]: Sprite.create(6),
+	},
 	cyclops: {
 		[Transform.ID]: Transform.create(),
 		[Body.ID]: Body.create(25),
 		[Collider.ID]: Collider.create(5, 0, 3),
 		[Mobile.ID]: Mobile.create(16),
-		[Mortal.ID]: Mortal.create(30),
+		[Mortal.ID]: Mortal.create(30, "blood"),
 		[Thrower.ID]: Thrower.create("axe", 16, 5),
 		[Monster.ID]: Monster.create(),
 		[Sprite.ID]: Sprite.create(1),
