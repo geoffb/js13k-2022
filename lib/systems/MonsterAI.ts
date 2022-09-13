@@ -44,13 +44,17 @@ export default function (engine: Engine.Model): void {
 			const sin = Math.sin(angle);
 			mobile.dx = cos;
 			mobile.dy = sin;
-			thrower.dx = cos;
-			thrower.dy = sin;
+			if (thrower !== undefined) {
+				thrower.dx = cos;
+				thrower.dy = sin;
+			}
 		} else {
 			mobile.dx = 0;
 			mobile.dy = 0;
-			thrower.dx = 0;
-			thrower.dy = 0;
+			if (thrower !== undefined) {
+				thrower.dx = 0;
+				thrower.dy = 0;
+			}
 		}
 	}
 }

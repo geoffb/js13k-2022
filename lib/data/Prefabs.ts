@@ -44,8 +44,12 @@ export const registry: Record<string, Model> = {
 		[Hazard.ID]: Hazard.create(),
 		[Sprite.ID]: Sprite.create(5),
 	},
-	blood: {
+	ghost: {
 		[Transform.ID]: Transform.create(),
+		[Collider.ID]: Collider.create(5),
+		[Hazard.ID]: Hazard.create(),
+		[Mobile.ID]: Mobile.create(8),
+		[Monster.ID]: Monster.create(),
 		[Sprite.ID]: Sprite.create(6),
 	},
 	cyclops: {
@@ -53,7 +57,7 @@ export const registry: Record<string, Model> = {
 		[Body.ID]: Body.create(25),
 		[Collider.ID]: Collider.create(5, 0, 3),
 		[Mobile.ID]: Mobile.create(16),
-		[Mortal.ID]: Mortal.create(30, "blood"),
+		[Mortal.ID]: Mortal.create(3, "ghost"),
 		[Thrower.ID]: Thrower.create("axe", 16, 5),
 		[Monster.ID]: Monster.create(),
 		[Sprite.ID]: Sprite.create(1),
